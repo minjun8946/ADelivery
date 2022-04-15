@@ -1,4 +1,4 @@
-package com.cocksearcher.domain
+package com.adelivery.adelivery
 
 import org.junit.Test
 

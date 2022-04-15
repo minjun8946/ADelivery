@@ -1,4 +1,4 @@
-package com.cocksearcher.adelivery
+package com.adelivery.data
 
 import org.junit.Test
 

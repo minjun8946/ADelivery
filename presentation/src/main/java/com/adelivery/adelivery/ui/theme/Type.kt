@@ -1,4 +1,4 @@
-package com.cocksearcher.adelivery.ui.theme
+package com.adelivery.adelivery.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
