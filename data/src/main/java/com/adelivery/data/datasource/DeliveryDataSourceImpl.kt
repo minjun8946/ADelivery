@@ -5,8 +5,9 @@ import com.adelivery.data.request.PatchDeliveryCheckRequest
 import com.adelivery.data.response.FetchDeliveryCompanyResponse
 import com.adelivery.data.response.PatchDeliveryCheckResponse
 import com.adelivery.domain.base.ErrorHandler
+import javax.inject.Inject
 
-class DeliveryDataSourceImpl(
+class DeliveryDataSourceImpl @Inject constructor(
     private val deliveryApi: DeliveryApi,
     private val errorHandler: ErrorHandler
 ): DeliveryDataSource {
