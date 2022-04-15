@@ -34,6 +34,7 @@ android {
 
 dependencies {
 
+    implementation (project (":domain"))
     implementation(Libraries.Activity.core)
     implementation(Libraries.Activity.appCompat)
     implementation(Libraries.Coroutines.coroutines)
