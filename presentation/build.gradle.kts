@@ -57,6 +57,8 @@ android {
 }
 
 dependencies {
+    implementation (project(":data"))
+    implementation (project(":domain"))
 
     implementation (Libraries.Activity.core)
     implementation (Libraries.Compose.composeUi)
