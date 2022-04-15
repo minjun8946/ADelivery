@@ -1,8 +1,9 @@
 package com.adelivery.domain.base
 
-class Unknown : RuntimeException()
-class NotFound : RuntimeException()
-class ToManyRequest: RuntimeException()
-class BadRequest: RuntimeException()
-class BadGateWay: RuntimeException()
-class ServerError: RuntimeException()
+class UnknownError() : RuntimeException()
+class NoInternetError(): RuntimeException()
+class NotFound(val msg: String) : RuntimeException()
+class TooManyRequest(val msg: String): RuntimeException()
+class BadRequest(val msg: String): RuntimeException()
+class BadGateWay(val msg: String): RuntimeException()
+class ServerError(val msg: String): RuntimeException()
