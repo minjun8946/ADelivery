@@ -7,10 +7,10 @@ import retrofit2.http.Path
 
 interface DeliveryApi{
     @GET("/")
-    fun fetchDeliveryCompany(): FetchDeliveryCompanyResponse
+    suspend fun fetchDeliveryCompany(): FetchDeliveryCompanyResponse
 
     @GET("{carrier_id}/tracks/{track_id}")
-    fun patchDeliveryCheck(
+    suspend fun patchDeliveryCheck(
         @Path("carrier_id") carrierId: String,
         @Path("track_id") trackId: Int
     ): PatchDeliveryCheckResponse

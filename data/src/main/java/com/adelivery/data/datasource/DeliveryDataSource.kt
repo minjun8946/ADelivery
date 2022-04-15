@@ -5,7 +5,7 @@ import com.adelivery.data.response.FetchDeliveryCompanyResponse
 import com.adelivery.data.response.PatchDeliveryCheckResponse
 
 interface DeliveryDataSource {
-    fun fetchDeliveryCompany(): FetchDeliveryCompanyResponse
+    suspend fun fetchDeliveryCompany(): FetchDeliveryCompanyResponse
 
-    fun patchDeliveryCheck(fetchDeliveryCheckRequest: PatchDeliveryCheckRequest): PatchDeliveryCheckResponse
+    suspend fun patchDeliveryCheck(fetchDeliveryCheckRequest: PatchDeliveryCheckRequest): PatchDeliveryCheckResponse
 }
