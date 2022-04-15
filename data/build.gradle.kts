@@ -35,13 +35,14 @@ android {
 dependencies {
 
     implementation (project (":domain"))
+
     implementation(Libraries.Activity.core)
     implementation(Libraries.Activity.appCompat)
     implementation(Libraries.Coroutines.coroutines)
     implementation(Libraries.Hilt.inject)
     implementation(Libraries.Room.room)
     implementation(Libraries.Room.roomKtx)
-    implementation(Libraries.Room.roomCompiler)
+    kapt(Libraries.Room.roomCompiler)
     implementation(Libraries.Retrofit.retrofit)
     implementation(Libraries.Retrofit.gsonConverter)
     testImplementation ("junit:junit:4.13.2")
