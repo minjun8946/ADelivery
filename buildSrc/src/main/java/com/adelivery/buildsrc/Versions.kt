@@ -17,7 +17,7 @@ object Versions {
     const val activity = "1.3.1"
     const val appCompat = "1.3.1"
     const val lifecycle = "2.4.0"
-    const val hilt = "2.38.1"
+    const val hilt = "2.41"
     const val hiltCompose = "1.0.0-rc01"
     const val coroutines = "1.6.0"
     const val retrofit = "2.9.0"
