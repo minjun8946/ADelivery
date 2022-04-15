@@ -41,6 +41,8 @@ dependencies {
     implementation(Libraries.Room.room)
     implementation(Libraries.Room.roomKtx)
     implementation(Libraries.Room.roomCompiler)
+    implementation(Libraries.Retrofit.retrofit)
+    implementation(Libraries.Retrofit.gsonConverter)
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
 }
