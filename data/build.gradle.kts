@@ -45,6 +45,8 @@ dependencies {
     kapt(Libraries.Room.roomCompiler)
     implementation(Libraries.Retrofit.retrofit)
     implementation(Libraries.Retrofit.gsonConverter)
+    implementation(Libraries.Moshi.moshi)
+    kapt(Libraries.Moshi.moshiCompiler)
     testImplementation ("junit:junit:4.13.2")
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
 }

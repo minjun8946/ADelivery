@@ -1,7 +1,7 @@
-package com.adelivery.data.api
+package com.adelivery.data.remote.api
 
-import com.adelivery.data.response.FetchDeliveryCompanyResponse
-import com.adelivery.data.response.PatchDeliveryCheckResponse
+import com.adelivery.data.remote.response.FetchDeliveryCompanyResponse
+import com.adelivery.data.remote.response.PatchDeliveryCheckResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,4 +1,4 @@
-package com.adelivery.data.request
+package com.adelivery.data.remote.request
 
 data class PatchDeliveryCheckRequest(
     val carrierId: String,

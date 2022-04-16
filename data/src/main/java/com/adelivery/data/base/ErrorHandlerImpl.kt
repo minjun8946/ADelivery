@@ -5,7 +5,6 @@ import retrofit2.HttpException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-
 class ErrorHandlerImpl @Inject constructor() : ErrorHandler {
 
     override suspend fun <T> invoke(p: suspend () -> T): T {
