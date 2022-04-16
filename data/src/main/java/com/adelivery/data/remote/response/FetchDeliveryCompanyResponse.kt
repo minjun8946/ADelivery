@@ -1,4 +1,4 @@
-package com.adelivery.data.response
+package com.adelivery.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
