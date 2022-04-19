@@ -1,10 +1,11 @@
 package com.adelivery.data.remote.datasource
 
 import com.adelivery.data.remote.api.DeliveryApi
-import com.adelivery.data.remote.request.PatchDeliveryCheckRequest
-import com.adelivery.data.remote.response.FetchDeliveryCompanyResponse
-import com.adelivery.data.remote.response.PatchDeliveryCheckResponse
+import com.adelivery.data.remote.request.DeliveryCheckRequest
+import com.adelivery.data.remote.response.toEntity
 import com.adelivery.domain.base.ErrorHandler
+import com.adelivery.domain.entity.DeliveryCompanyEntity
+import com.adelivery.domain.entity.DeliveryCheckEntity
 import javax.inject.Inject
 
 class RemoteDeliveryDataSourceImpl @Inject constructor(
@@ -12,17 +13,17 @@ class RemoteDeliveryDataSourceImpl @Inject constructor(
     private val errorHandler: ErrorHandler
 ): RemoteDeliveryDataSource {
 
-    override suspend fun fetchDeliveryCompany(): FetchDeliveryCompanyResponse =
-        errorHandler { deliveryApi.fetchDeliveryCompany() }
+    override suspend fun fetchDeliveryCompany(): List<DeliveryCompanyEntity> =
+        errorHandler { deliveryApi.fetchDeliveryCompany().map { it.toEntity() } }
 
 
     override suspend fun patchDeliveryCheck(
-        fetchDeliveryCheckRequest: PatchDeliveryCheckRequest
-    ): PatchDeliveryCheckResponse =
+        deliveryCheckRequest: DeliveryCheckRequest
+    ): DeliveryCheckEntity =
         errorHandler {
             deliveryApi.patchDeliveryCheck(
-                fetchDeliveryCheckRequest.carrierId,
-                fetchDeliveryCheckRequest.trackId
-            )
+                deliveryCheckRequest.carrierId,
+                deliveryCheckRequest.trackId
+            ).toEntity(deliveryCheckRequest)
         }
 }
