@@ -1,11 +1,11 @@
 package com.adelivery.data.remote.datasource
 
-import com.adelivery.data.remote.request.PatchDeliveryCheckRequest
-import com.adelivery.data.remote.response.FetchDeliveryCompanyResponse
-import com.adelivery.data.remote.response.PatchDeliveryCheckResponse
+import com.adelivery.data.remote.request.DeliveryCheckRequest
+import com.adelivery.domain.entity.DeliveryCheckEntity
+import com.adelivery.domain.entity.DeliveryCompanyEntity
 
 interface RemoteDeliveryDataSource {
-    suspend fun fetchDeliveryCompany(): FetchDeliveryCompanyResponse
+    suspend fun fetchDeliveryCompany(): List<DeliveryCompanyEntity>
 
-    suspend fun patchDeliveryCheck(fetchDeliveryCheckRequest: PatchDeliveryCheckRequest): PatchDeliveryCheckResponse
+    suspend fun patchDeliveryCheck(deliveryCheckRequest: DeliveryCheckRequest): DeliveryCheckEntity
 }

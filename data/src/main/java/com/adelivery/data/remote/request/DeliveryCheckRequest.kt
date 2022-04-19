@@ -1,6 +1,6 @@
 package com.adelivery.data.remote.request
 
-data class PatchDeliveryCheckRequest(
+data class DeliveryCheckRequest(
     val carrierId: String,
     val trackId: Int
 )

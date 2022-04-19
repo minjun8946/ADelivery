@@ -1,17 +1,19 @@
 package com.adelivery.data.local.entity
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.adelivery.domain.entity.DeliveryCompanyEntity
 
 @Entity(tableName = "deliverycompanyroomentity")
 data class DeliveryCompanyRoomEntity(
-    @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    val deliveryCompanyList: List<DeliveryCompany>
-){
-    data class DeliveryCompany(
-        val id: String,
-        val name: String,
-        val tel: String
+    @PrimaryKey val id: String,
+    val name: String,
+    val tel: String
+)
+
+fun DeliveryCompanyRoomEntity.toEntity() =
+    DeliveryCompanyEntity(
+        id = id,
+        name = name,
+        tel = tel
     )
-}
