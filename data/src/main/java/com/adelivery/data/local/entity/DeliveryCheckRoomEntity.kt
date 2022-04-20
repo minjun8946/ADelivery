@@ -41,14 +41,14 @@ data class Progresses(
     val progressDescription: String
 )
 
-fun DeliveryCheckRoomEntity.toEntity() =
+fun DeliveryCheckRoomEntity.toCheckEntity() =
     DeliveryCheckEntity(
         trackId = trackId,
         carrierId = carrierId,
         from = from.toEntity(),
         state = state.toEntity(),
         to = to.toEntity(),
-        progressList = progressList.map { it.toCheckEntity() }
+        progressList = progressList.map { it.toEntity() }
     )
 
 
@@ -75,8 +75,50 @@ fun Location.toEntity() =
         locationName = locationName
     )
 
-fun Progresses.toCheckEntity() =
+fun Progresses.toEntity() =
     com.adelivery.domain.entity.Progresses(
+        progressState = progressState.toEntity(),
+        progressTime = progressTime,
+        progressDescription = progressDescription,
+        progressLocation = progressLocation.toEntity()
+    )
+
+fun DeliveryCheckEntity.toCheckRoomEntity() =
+    DeliveryCheckRoomEntity(
+        trackId = trackId,
+        carrierId = carrierId,
+        from = from.toEntity(),
+        state = state.toEntity(),
+        to = to.toEntity(),
+        progressList = progressList.map { it.toEntity() }
+    )
+
+
+fun com.adelivery.domain.entity.From.toEntity() =
+    From(
+        fromTime = fromTime,
+        fromName = fromName
+    )
+
+fun com.adelivery.domain.entity.TO.toEntity() =
+    TO(
+        toTime = toTime,
+        toName = toName
+    )
+
+fun com.adelivery.domain.entity.State.toEntity() =
+    State(
+        stateId = stateId,
+        stateText = stateText
+    )
+
+fun com.adelivery.domain.entity.Location.toEntity() =
+    Location(
+        locationName = locationName
+    )
+
+fun com.adelivery.domain.entity.Progresses.toEntity() =
+    Progresses(
         progressState = progressState.toEntity(),
         progressTime = progressTime,
         progressDescription = progressDescription,

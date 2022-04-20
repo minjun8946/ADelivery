@@ -11,7 +11,7 @@ import com.adelivery.domain.entity.DeliveryCompanyEntity
 interface LocalDeliveryDataSource {
     suspend fun insertDeliveryCheck(deliveryCheckRoomEntity: DeliveryCheckRoomEntity)
 
-    suspend fun insertDeliveryCompany(deliveryCompanyRoomEntity: DeliveryCompanyRoomEntity)
+    suspend fun insertDeliveryCompany(deliveryCompanyRoomEntity: List<DeliveryCompanyRoomEntity>)
 
     suspend fun insertDeliveryBasic(deliveryBasicRoomEntity: DeliveryBasicRoomEntity)
 

@@ -12,7 +12,7 @@ import com.adelivery.data.local.entity.DeliveryCompanyRoomEntity
 interface DeliveryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDeliveryCompany(deliveryCompanyRoomEntity: DeliveryCompanyRoomEntity)
+    suspend fun insertDeliveryCompany(deliveryCompanyRoomEntity: List<DeliveryCompanyRoomEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDeliveryCheck(deliveryCheckRoomEntity: DeliveryCheckRoomEntity)

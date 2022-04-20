@@ -2,6 +2,7 @@ package com.adelivery.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.adelivery.domain.entity.DeliveryCheckEntity
 import com.adelivery.domain.entity.DeliveryCompanyEntity
 
 @Entity(tableName = "deliverycompanyroomentity")
@@ -13,6 +14,13 @@ data class DeliveryCompanyRoomEntity(
 
 fun DeliveryCompanyRoomEntity.toEntity() =
     DeliveryCompanyEntity(
+        id = id,
+        name = name,
+        tel = tel
+    )
+
+fun DeliveryCompanyEntity.toEntity() =
+    DeliveryCompanyRoomEntity(
         id = id,
         name = name,
         tel = tel
