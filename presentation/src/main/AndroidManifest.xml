@@ -3,6 +3,7 @@
     package="com.adelivery.adelivery">
 
     <application
+        android:name=".hilt.ADeliveryApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

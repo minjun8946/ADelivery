@@ -6,10 +6,10 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface DeliveryApi{
-    @GET("/")
+    @GET("/carriers")
     suspend fun fetchDeliveryCompany(): List<DeliveryCompanyResponse>
 
-    @GET("{carrier_id}/tracks/{track_id}")
+    @GET("/carriers/{carrier_id}/tracks/{track_id}")
     suspend fun patchDeliveryCheck(
         @Path("carrier_id") carrierId: String,
         @Path("track_id") trackId: Int
