@@ -1,10 +1,7 @@
 package com.adelivery.data.local.datasource
 
 import com.adelivery.data.local.dao.DeliveryDao
-import com.adelivery.data.local.entity.DeliveryBasicRoomEntity
-import com.adelivery.data.local.entity.DeliveryCheckRoomEntity
-import com.adelivery.data.local.entity.DeliveryCompanyRoomEntity
-import com.adelivery.data.local.entity.toEntity
+import com.adelivery.data.local.entity.*
 import com.adelivery.data.remote.request.DeliveryCheckRequest
 import com.adelivery.domain.entity.DeliveryBasicEntity
 import com.adelivery.domain.entity.DeliveryCheckEntity
@@ -17,7 +14,7 @@ class LocalDeliveryDataSourceImpl @Inject constructor(
     override suspend fun insertDeliveryCheck(deliveryCheckRoomEntity: DeliveryCheckRoomEntity) =
         deliveryDao.insertDeliveryCheck(deliveryCheckRoomEntity)
 
-    override suspend fun insertDeliveryCompany(deliveryCompanyRoomEntity: DeliveryCompanyRoomEntity) =
+    override suspend fun insertDeliveryCompany(deliveryCompanyRoomEntity: List<DeliveryCompanyRoomEntity>) =
         deliveryDao.insertDeliveryCompany(deliveryCompanyRoomEntity)
 
     override suspend fun insertDeliveryBasic(deliveryBasicRoomEntity: DeliveryBasicRoomEntity) =
@@ -25,11 +22,11 @@ class LocalDeliveryDataSourceImpl @Inject constructor(
 
 
     override suspend fun fetchDeliveryBasic(): List<DeliveryBasicEntity> =
-        deliveryDao.fetchDeliveryBasic().map { it.toEntity() }
+        deliveryDao.fetchDeliveryBasic().map { it.toBasicEntity() }
 
 
     override suspend fun fetchDeliveryCheck(deliveryCheckRequest: DeliveryCheckRequest): DeliveryCheckEntity =
-        deliveryDao.fetchDeliveryCheck(deliveryCheckRequest.trackId).toEntity()
+        deliveryDao.fetchDeliveryCheck(deliveryCheckRequest.trackId).toCheckEntity()
 
     override suspend fun fetchDeliveryCompany(): List<DeliveryCompanyEntity> =
         deliveryDao.fetchDeliveryCompany().map { it.toEntity() }
