@@ -4,17 +4,12 @@ import com.adelivery.domain.entity.DeliveryBasicEntity
 import com.adelivery.domain.entity.DeliveryCheckEntity
 import com.adelivery.domain.entity.DeliveryCompanyEntity
 import com.adelivery.domain.param.DeliveryCheckParam
+import kotlinx.coroutines.flow.Flow
 
 interface DeliveryRepository {
-    suspend fun insertDeliveryCheck(deliveryCheckEntity: DeliveryCheckEntity)
+    suspend fun fetchDeliveryBasic(): Flow<List<DeliveryBasicEntity>>
 
-    suspend fun insertDeliveryCompany(deliveryCompanyEntity: DeliveryCompanyEntity)
+    suspend fun fetchDeliveryCheck(deliveryCheckParam: DeliveryCheckParam): Flow<DeliveryCheckEntity>
 
-    suspend fun insertDeliveryBasic(deliveryBasicEntity: DeliveryBasicEntity)
-
-    suspend fun fetchDeliveryBasic(): List<DeliveryBasicEntity>
-
-    suspend fun fetchDeliveryCheck(deliveryCheckParam: DeliveryCheckParam): DeliveryCheckEntity
-
-    suspend fun fetchDeliveryCompany(): DeliveryCompanyEntity
+    suspend fun fetchDeliveryCompany(): Flow<List<DeliveryCompanyEntity>>
 }
