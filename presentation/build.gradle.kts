@@ -64,6 +64,7 @@ dependencies {
     implementation (Libraries.Compose.composeUi)
     implementation (Libraries.Compose.composeMaterial)
     implementation (Libraries.Compose.composePreview)
+    implementation(Libraries.Compose.navigation)
     implementation (Libraries.LifeCycle.runTime)
     implementation (Libraries.Compose.composeActivity)
     debugImplementation(Libraries.Compose.composeUiTooling)
