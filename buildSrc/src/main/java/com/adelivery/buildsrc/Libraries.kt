@@ -9,6 +9,7 @@ object Libraries {
         const val composeUi = "androidx.compose.ui:ui:${Versions.compose}"
         const val composeUiUtil = "androidx.compose.ui:ui-util:${Versions.compose}"
         const val composeUiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+        const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
         const val composeConstraint = "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraint}"
         const val composeActivity = "androidx.activity:activity-compose:${Versions.activity}"
         const val navigation = "androidx.navigation:navigation-compose:${Versions.navigation}"
