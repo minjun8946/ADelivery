@@ -12,7 +12,7 @@ class ErrorHandlerImpl @Inject constructor() : ErrorHandler {
             p.invoke()
         } catch (e: Throwable) {
             throw if (e !is HttpException) {
-                UnknownError()
+                UnknownError(msg = e.message?: "no message")
             } else {
                 when (e.code()) {
                     400 -> BadRequest(e.message())
