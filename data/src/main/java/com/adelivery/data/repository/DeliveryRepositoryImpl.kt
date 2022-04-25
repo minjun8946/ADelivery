@@ -13,8 +13,9 @@ import com.adelivery.domain.param.DeliveryCheckParam
 import com.adelivery.domain.repository.DeliveryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class DeliveryRepositoryImpl(
+class DeliveryRepositoryImpl @Inject constructor(
     private val remoteDeliveryDataSource: RemoteDeliveryDataSource,
     private val localDeliveryDataSource: LocalDeliveryDataSource
 ): DeliveryRepository {
