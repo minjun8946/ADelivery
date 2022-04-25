@@ -14,7 +14,7 @@ import com.adelivery.data.local.entity.DeliveryCompanyRoomEntity
         DeliveryCheckRoomEntity::class,
         DeliveryCompanyRoomEntity::class,
         DeliveryBasicRoomEntity::class
-    ], version = 1, exportSchema = false
+    ], version = 2, exportSchema = false
 )
 
 @TypeConverters(
