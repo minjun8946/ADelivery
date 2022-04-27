@@ -32,6 +32,8 @@ object RoomModule {
         moshi: Moshi
     ): DeliveryDataBase = Room
         .databaseBuilder(context, DeliveryDataBase::class.java, "WalkHubDataBase")
+        .fallbackToDestructiveMigration()
+        .allowMainThreadQueries()
         .addTypeConverter(DeliveryProgressConverter(moshi))
         .build()
 
