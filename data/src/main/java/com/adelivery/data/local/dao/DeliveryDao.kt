@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.adelivery.data.local.entity.DeliveryBasicRoomEntity
 import com.adelivery.data.local.entity.DeliveryCheckRoomEntity
 import com.adelivery.data.local.entity.DeliveryCompanyRoomEntity
 
@@ -17,16 +16,13 @@ interface DeliveryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDeliveryCheck(deliveryCheckRoomEntity: DeliveryCheckRoomEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDeliveryBasicRoom(deliveryBasicRoomEntity: DeliveryBasicRoomEntity)
-
     @Query("SELECT * FROM deliverycheckroomentity WHERE trackId== :trackId")
-    fun fetchDeliveryCheck(trackId: Int): DeliveryCheckRoomEntity
+    fun fetchDeliveryCheck(trackId: String): DeliveryCheckRoomEntity
+
+    @Query("SELECT * FROM deliverycheckroomentity")
+    fun fetchDeliveryList(): List<DeliveryCheckRoomEntity>
 
     @Query("SELECT * FROM deliverycompanyroomentity")
     fun fetchDeliveryCompany(): List<DeliveryCompanyRoomEntity>
-
-    @Query("SELECT *FROM deliverybasicroomentity")
-    fun fetchDeliveryBasic(): List<DeliveryBasicRoomEntity>
 
 }
