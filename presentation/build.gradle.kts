@@ -57,17 +57,21 @@ android {
 }
 
 dependencies {
-    implementation (project(":data"))
-    implementation (project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
 
-    implementation (Libraries.Activity.core)
-    implementation (Libraries.Compose.composeUi)
-    implementation (Libraries.Compose.composeMaterial)
-    implementation (Libraries.Compose.composePreview)
+    implementation(Libraries.Activity.core)
+    implementation(Libraries.Compose.composeUi)
+    implementation(Libraries.Compose.composeMaterial)
+    implementation(Libraries.Compose.composePreview)
     implementation(Libraries.Compose.navigation)
-    implementation (Libraries.LifeCycle.runTime)
-    implementation (Libraries.Compose.composeActivity)
+    implementation(Libraries.Compose.composeLiveData)
+    implementation(Libraries.Compose.composeActivity)
+    implementation(Libraries.Compose.composeViewModel)
+    implementation(Libraries.Compose.composeIconExtended)
     debugImplementation(Libraries.Compose.composeUiTooling)
+
+
     implementation(Libraries.Hilt.hilt)
     kapt(Libraries.Hilt.hiltCompiler)
     implementation(Libraries.Hilt.hiltCompose)
