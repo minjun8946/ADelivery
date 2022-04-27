@@ -1,6 +1,6 @@
 package com.adelivery.domain.base
 
-class UnknownError() : RuntimeException()
+class UnknownError(msg: String) : RuntimeException()
 class NoInternetError(): RuntimeException()
 class NotFound(val msg: String) : RuntimeException()
 class TooManyRequest(val msg: String): RuntimeException()

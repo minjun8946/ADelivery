@@ -7,5 +7,5 @@ import com.adelivery.domain.entity.DeliveryCompanyEntity
 interface RemoteDeliveryDataSource {
     suspend fun fetchDeliveryCompany(): List<DeliveryCompanyEntity>
 
-    suspend fun patchDeliveryCheck(deliveryCheckRequest: DeliveryCheckRequest): DeliveryCheckEntity
+    suspend fun patchDeliveryCheck(deliveryCheckRequest: DeliveryCheckRequest): DeliveryCheckEntity?
 }

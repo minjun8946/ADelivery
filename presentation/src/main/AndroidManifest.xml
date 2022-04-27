@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.adelivery.adelivery">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name=".hilt.ADeliveryApp"
         android:allowBackup="true"

@@ -6,9 +6,10 @@ import com.google.gson.annotations.SerializedName
 
 data class DeliveryCheckResponse(
     @SerializedName("from") val from: From,
-    @SerializedName("to") val to: TO,
+    @SerializedName("to") val to: TO?,
     @SerializedName("state") val state: State,
-    @SerializedName("progress") val progressList: List<Progresses>
+    @SerializedName("progresses") val progressList: List<Progresses>,
+    @SerializedName("carrier") val carrier: Carrier
 ) {
     data class From(
         @SerializedName("time") val time: String,
@@ -30,22 +31,29 @@ data class DeliveryCheckResponse(
     )
 
     data class Progresses(
-        @SerializedName("state") val state: State,
+        @SerializedName("status") val state: State,
         @SerializedName("time") val time: String,
         @SerializedName("location") val location: Location,
         @SerializedName("description") val description: String
     )
+    data class Carrier(
+        @SerializedName("id") val id: String,
+        @SerializedName("name") val name: String,
+        @SerializedName("tel") val tel: String
+    )
 }
 
 fun DeliveryCheckResponse.toEntity(deliveryCheckRequest: DeliveryCheckRequest) =
-    DeliveryCheckEntity(
+    to?.let {
+        DeliveryCheckEntity(
         trackId = deliveryCheckRequest.trackId,
         carrierId = deliveryCheckRequest.carrierId,
         from = from.toEntity(),
-        to = to.toEntity(),
+        to = it.toEntity(),
         state = state.toEntity(),
         progressList = progressList.map { it.toEntity() }
     )
+    }
 
 fun DeliveryCheckResponse.From.toEntity() =
     From(

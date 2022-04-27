@@ -5,7 +5,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.adelivery.data.local.converter.DeliveryProgressConverter
 import com.adelivery.data.local.dao.*
-import com.adelivery.data.local.entity.DeliveryBasicRoomEntity
 import com.adelivery.data.local.entity.DeliveryCheckRoomEntity
 import com.adelivery.data.local.entity.DeliveryCompanyRoomEntity
 
@@ -13,8 +12,7 @@ import com.adelivery.data.local.entity.DeliveryCompanyRoomEntity
     entities = [
         DeliveryCheckRoomEntity::class,
         DeliveryCompanyRoomEntity::class,
-        DeliveryBasicRoomEntity::class
-    ], version = 1, exportSchema = false
+    ], version = 9, exportSchema = false
 )
 
 @TypeConverters(

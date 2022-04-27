@@ -1,7 +1,7 @@
 package com.adelivery.domain.entity
 
 data class DeliveryCheckEntity(
-    val trackId: Int,
+    val trackId: String,
     val carrierId: String,
     val from: From,
     val to: TO,
@@ -15,7 +15,7 @@ data class From(
 )
 
 data class TO(
-    val toTime: String,
+    val toTime: String?,
     val toName: String
 )
 

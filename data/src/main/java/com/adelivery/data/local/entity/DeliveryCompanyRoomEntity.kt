@@ -9,7 +9,7 @@ import com.adelivery.domain.entity.DeliveryCompanyEntity
 data class DeliveryCompanyRoomEntity(
     @PrimaryKey val id: String,
     val name: String,
-    val tel: String
+    val tel: String?
 )
 
 fun DeliveryCompanyRoomEntity.toEntity() =

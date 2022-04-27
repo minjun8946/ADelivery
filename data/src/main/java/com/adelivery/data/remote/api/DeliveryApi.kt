@@ -12,6 +12,6 @@ interface DeliveryApi{
     @GET("/carriers/{carrier_id}/tracks/{track_id}")
     suspend fun patchDeliveryCheck(
         @Path("carrier_id") carrierId: String,
-        @Path("track_id") trackId: Int
-    ): DeliveryCheckResponse
+        @Path("track_id") trackId: String
+    ): DeliveryCheckResponse?
 }

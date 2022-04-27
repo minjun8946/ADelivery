@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class DeliveryCompanyResponse(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
-    @SerializedName("tel") val tel: String
+    @SerializedName("tel") val tel: String?
 )
 
 fun DeliveryCompanyResponse.toEntity() =
