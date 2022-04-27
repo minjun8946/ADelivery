@@ -4,60 +4,70 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.adelivery.adelivery.component.DeliveryCheck
 import com.adelivery.domain.entity.DeliveryCompanyEntity
 
 @Composable
-fun Home() {
+fun Home(viewModel: HomeViewModel = hiltViewModel()) {
+    viewModel.setEvent(HomeContract.Event.OnFetchDeliveryCompany)
+
+    val state = viewModel.uiState.collectAsState().value
+    HomeScreen(viewModel, state)
+}
+
+@Composable
+fun HomeScreen(
+    viewModel: HomeViewModel,
+    state: HomeContract.State
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .padding(bottom = 50.dp)
             .background(Color.White)
     ) {
-        Column() {
+        Column {
             val textState = remember { mutableStateOf("") }
             val company = remember { mutableStateOf(DeliveryCompanyEntity("", "", "")) }
-            val list = listOf(
-                DeliveryCompanyEntity("aa", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa"),
-                DeliveryCompanyEntity("bb", "가나다라", "aa")
-            )
             Row(modifier = Modifier.fillMaxWidth()) {
                 TrackNumberTextField(textState)
-                SearchButton(textState.value, company.value.id)
+                SearchButton(textState.value, company.value.id, viewModel)
             }
-            CompanyDropDown(data = list, company)
+            CompanyDropDown(state, company)
+            ProcessColumn(state = state)
         }
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun TrackNumberTextField(textState: MutableState<String>) {
+fun TrackNumberTextField(
+    textState: MutableState<String>,
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     TextField(
         value = textState.value,
         maxLines = 1,
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number,
+            imeAction = ImeAction.Done
+        ),
         placeholder = { Text(text = "운송번호를 입력해주세요") },
         onValueChange = { textValue -> textState.value = textValue },
         modifier = Modifier.padding(15.dp),
@@ -67,13 +77,24 @@ fun TrackNumberTextField(textState: MutableState<String>) {
             unfocusedIndicatorColor = Color.White,
             cursorColor = Color.Black
         ),
+        keyboardActions = KeyboardActions(
+            onDone = {
+                keyboardController?.hide()
+            }
+        )
     )
 }
 
 @Composable
-fun SearchButton(number: String, company: String) {
+fun SearchButton(
+    number: String,
+    company: String,
+    viewModel: HomeViewModel,
+) {
     Button(
-        onClick = { if (number != "" && company != "") println("$number $company") },
+        onClick = {
+            if (number != "" && company != "") viewModel.fetchDeliveryCheck(number, company)
+        },
         modifier = Modifier
             .height(50.dp)
             .width(80.dp)
@@ -88,9 +109,21 @@ fun SearchButton(number: String, company: String) {
 
 @Composable
 fun CompanyDropDown(
-    data: List<DeliveryCompanyEntity>,
+    state: HomeContract.State,
     company: MutableState<DeliveryCompanyEntity>
 ) {
+    val data: List<DeliveryCompanyEntity> =
+        when (state.companyState) {
+            is HomeContract.CompanyState.Success -> {
+                state.companyState.deliveryCompany
+            }
+            else -> {
+                println("aa ${state.companyState}")
+                listOf(DeliveryCompanyEntity("", "nn", ""))
+            }
+        }
+
+
     val isDropDownMenuExpanded = remember { mutableStateOf(false) }
     Button(
         onClick = {
@@ -108,7 +141,9 @@ fun CompanyDropDown(
     DropdownMenu(
         expanded = isDropDownMenuExpanded.value,
         onDismissRequest = { isDropDownMenuExpanded.value = false },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.White)
     ) {
         data.forEach { deliveryCompanyEntity ->
             DropdownMenuItem(onClick = {
@@ -123,7 +158,6 @@ fun CompanyDropDown(
 
 @Composable
 fun CompanyItems(data: String) {
-    val color = remember { mutableStateOf(Color.White) }
     Card(
         Modifier
             .padding(8.dp)
@@ -131,7 +165,7 @@ fun CompanyItems(data: String) {
             .height(60.dp),
         elevation = 8.dp,
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
-        backgroundColor = color.value
+        backgroundColor = Color.White
 
     ) {
         Box(contentAlignment = Alignment.Center) {
@@ -140,4 +174,13 @@ fun CompanyItems(data: String) {
     }
 }
 
+@Composable
+fun ProcessColumn(state: HomeContract.State) {
+    when (state.progressState) {
+        is HomeContract.ProgressState.Success -> DeliveryCheck(data = state.progressState.deliveryCheck)
+        else -> {
+            println(state)
+        }
+    }
+}
 
