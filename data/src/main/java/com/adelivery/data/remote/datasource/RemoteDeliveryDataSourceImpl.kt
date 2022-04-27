@@ -24,6 +24,6 @@ class RemoteDeliveryDataSourceImpl @Inject constructor(
             deliveryApi.patchDeliveryCheck(
                 deliveryCheckRequest.carrierId,
                 deliveryCheckRequest.trackId
-            ).toEntity(deliveryCheckRequest)
+            )!!.toEntity(deliveryCheckRequest)!!
         }
 }

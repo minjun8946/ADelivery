@@ -4,7 +4,7 @@ import com.adelivery.domain.param.DeliveryCheckParam
 
 data class DeliveryCheckRequest(
     val carrierId: String,
-    val trackId: Int
+    val trackId: String
 )
 
 fun DeliveryCheckParam.toEntity() =
