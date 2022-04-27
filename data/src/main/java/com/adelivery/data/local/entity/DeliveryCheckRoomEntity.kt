@@ -7,7 +7,7 @@ import com.adelivery.domain.entity.DeliveryCheckEntity
 
 @Entity(tableName = "deliverycheckroomentity")
 data class DeliveryCheckRoomEntity(
-    @PrimaryKey(autoGenerate = true) val trackId: Int,
+    @PrimaryKey val trackId: String,
     val carrierId: String,
     @Embedded val from: CheckFrom,
     @Embedded val to: CheckTO,
@@ -20,7 +20,7 @@ data class DeliveryCheckRoomEntity(
     )
 
     data class CheckTO(
-        val toTime: String,
+        val toTime: String?,
         val toName: String
     )
 
