@@ -11,5 +11,4 @@ class FetchDeliveryCheckUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(deliveryCheckParam: DeliveryCheckParam): Flow<DeliveryCheckEntity> =
         deliveryRepository.fetchDeliveryCheck(deliveryCheckParam)
-
 }
