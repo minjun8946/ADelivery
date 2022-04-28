@@ -39,12 +39,11 @@ fun DeliveryList(state: MyPageContract.State){
 @Composable
 fun DeliveryListColumn(data: List<DeliveryCheckEntity>){
 
-    Column(modifier = Modifier
+    Box(modifier = Modifier
         .fillMaxSize()
         .padding(12.dp)
-        .padding(bottom = 50.dp)) {
-        Box{
-            data.map { DeliveryCheck(data = it) }
-        }
+        .padding(bottom = 50.dp))
+    {
+        data.map { DeliveryCheck(data = it) }
     }
 }

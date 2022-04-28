@@ -3,12 +3,8 @@ package com.adelivery.adelivery.component
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -96,17 +92,19 @@ private fun CardContent(data: DeliveryCheckEntity?) {
 @Composable
 fun DeliveryProgressColumn(data: List<Progresses>?) {
 
-    LazyColumn(
+
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
             .padding(start = 4.dp)
     ) {
-        items(items = data!!, itemContent = { item ->
-            Box {
-                ProgressItem(data = item)
+        Column {
+            data!!.map {
                 //StepsProgressBar()
+                ProgressItem(data = it)
             }
-        })
+        }
     }
 }
 
@@ -125,7 +123,7 @@ fun ProgressItem(data: Progresses) {
             Column(
                 modifier = Modifier
                     .width(100.dp)
-                    .padding(start = 20.dp,top = 40.dp)
+                    .padding(start = 20.dp, top = 40.dp)
                     .fillMaxHeight()
             ) {
                 Text(
