@@ -7,6 +7,7 @@ data class CacheType(
         ALWAYS,
         NEVER,
         COMPARE,
-        ONES
+        ONES,
+        LOCAL
     }
 }

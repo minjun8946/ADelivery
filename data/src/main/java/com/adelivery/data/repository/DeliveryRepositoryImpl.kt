@@ -27,7 +27,9 @@ class DeliveryRepositoryImpl @Inject constructor(
             .cacheType(CacheType(CacheType.Type.ALWAYS))
 
     override suspend fun fetchDeliveryList(): Flow<List<DeliveryCheckEntity>> =
-        flow { emit(localDeliveryDataSource.fetchDeliveryList()) }
+        CacheUtil<List<DeliveryCheckEntity>>()
+            .localDataSource { localDeliveryDataSource.fetchDeliveryList() }
+            .cacheType(CacheType(CacheType.Type.LOCAL))
 
 
     override suspend fun fetchDeliveryCompany(): Flow<List<DeliveryCompanyEntity>> =
@@ -35,6 +37,6 @@ class DeliveryRepositoryImpl @Inject constructor(
             .localDataSource { localDeliveryDataSource.fetchDeliveryCompany() }
             .remoteDataSource { remoteDeliveryDataSource.fetchDeliveryCompany() }
             .insertRoom { localDeliveryDataSource.insertDeliveryCompany(it.map { it.toEntity() }) }
-            .cacheType(CacheType((CacheType.Type.ALWAYS)))
+            .cacheType(CacheType((CacheType.Type.ONES)))
 }
 

@@ -27,21 +27,23 @@ class CacheUtil<T> {
             CacheType.Type.NEVER -> never()
             CacheType.Type.COMPARE -> cache()
             CacheType.Type.ONES -> ones()
+            CacheType.Type.LOCAL -> local()
         }
     }
 
     private suspend fun ones(): Flow<T>{
-        return if (localDataSource.invoke() != null)
-            flow { emit(localDataSource.invoke()) }
-        else {
+        return if (localDataSource.invoke() == null){
             insertRoom(remoteDataSource.invoke())
-            return flow { emit(remoteDataSource.invoke()) }
+            flow { emit(remoteDataSource.invoke()) }
+        }
+        else {
+            flow { emit(localDataSource.invoke()) }
         }
     }
 
     private suspend fun always(): Flow<T> {
         insertRoom(remoteDataSource.invoke())
-        return flow { emit(localDataSource.invoke()) }
+        return flow { emit(remoteDataSource.invoke()) }
     }
 
     private suspend fun never(): Flow<T>{
@@ -56,6 +58,10 @@ class CacheUtil<T> {
             insertRoom(remoteDataSource.invoke())
             flow { emit(remoteDataSource.invoke()) }
         }
+    }
+
+    private suspend fun local(): Flow<T>{
+        return flow { emit(localDataSource.invoke()) }
     }
 
 }
