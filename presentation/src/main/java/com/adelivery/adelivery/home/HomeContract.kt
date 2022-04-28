@@ -11,7 +11,6 @@ class HomeContract {
 
     sealed class Event : UiEvent {
         object OnFetchDeliveryCompany : Event()
-        object OnShowToastClicked : Event()
     }
 
     data class State(
@@ -22,19 +21,19 @@ class HomeContract {
 
     sealed class CompanyState {
         object Idle : CompanyState()
-        object Loading : CompanyState()
+        object Failure : CompanyState()
         data class Success(val deliveryCompany : List<DeliveryCompanyEntity>) : CompanyState()
     }
 
     sealed class ProgressState {
         object Idle : ProgressState()
-        object Loading : ProgressState()
+        object Failure: ProgressState()
         data class Success(val deliveryCheck : DeliveryCheckEntity?) : ProgressState()
     }
 
     sealed class Effect : UiEffect {
 
-        object ShowToast : Effect()
+        data class ShowToast(val msg: String) : Effect()
     }
 
 }

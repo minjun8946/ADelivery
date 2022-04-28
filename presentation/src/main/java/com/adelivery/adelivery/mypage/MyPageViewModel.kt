@@ -2,9 +2,11 @@ package com.adelivery.adelivery.mypage
 
 import androidx.lifecycle.viewModelScope
 import com.adelivery.adelivery.base.BaseViewModel
-import com.adelivery.adelivery.base.exceptionHandler
+import com.adelivery.adelivery.home.HomeContract
+import com.adelivery.domain.base.*
 import com.adelivery.domain.usecase.FetchDeliveryListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,4 +35,8 @@ class MyPageViewModel @Inject constructor(
             MyPageContract.DeliveryListState.Idle
         )
 
+    private val exceptionHandler = CoroutineExceptionHandler{ a, error ->
+        setState { copy(MyPageContract.DeliveryListState.Failure) }
+         MyPageContract.Effect.ShowToast("알 수 없는 문제가 발생하였습니다")
+    }
 }
