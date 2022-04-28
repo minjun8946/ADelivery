@@ -200,6 +200,5 @@ fun sideEffect(context: Context,effect: HomeContract.Effect) {
             Toast.makeText(context, effect.msg,Toast.LENGTH_SHORT).show()
         }
     }
-
 }
 

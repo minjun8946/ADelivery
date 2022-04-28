@@ -16,16 +16,15 @@ class MyPageContract {
         val deliveryList: DeliveryListState
     ) : UiState
 
-
     sealed class DeliveryListState {
         object Idle : DeliveryListState()
-        object Loading : DeliveryListState()
+        object Failure : DeliveryListState()
         data class Success(val deliveryList : List<DeliveryCheckEntity>) : DeliveryListState()
     }
 
     sealed class Effect : UiEffect {
 
-        object ShowToast : Effect()
+        data class ShowToast(val msg: String) : Effect()
     }
 
 }
