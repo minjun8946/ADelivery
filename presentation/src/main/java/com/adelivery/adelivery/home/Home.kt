@@ -1,5 +1,7 @@
 package com.adelivery.adelivery.home
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -12,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -26,7 +29,14 @@ fun Home(viewModel: HomeViewModel = hiltViewModel()) {
     viewModel.setEvent(HomeContract.Event.OnFetchDeliveryCompany)
 
     val state = viewModel.uiState.collectAsState().value
+    val context = LocalContext.current
     HomeScreen(viewModel, state)
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect {
+            sideEffect(context,it)
+        }
+    }
+
 }
 
 @Composable
@@ -182,5 +192,14 @@ fun ProcessColumn(state: HomeContract.State) {
             println(state)
         }
     }
+}
+
+fun sideEffect(context: Context,effect: HomeContract.Effect) {
+    when (effect) {
+        is HomeContract.Effect.ShowToast -> {
+            Toast.makeText(context, effect.msg,Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
 
